@@ -4,16 +4,16 @@ import fs from "fs";
 
 const s3Upload = async (file: any) => {
   const s3 = new S3Client({
-    region: process.env.AWS_REGION,
+    region: process.env.CUSTOM_AWS_REGION,
     credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      accessKeyId: process.env.CUSTOM_AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.CUSTOM_AWS_SECRET_ACCESS_KEY,
     },
   });
 
   const fileStream = fs.createReadStream(file.filepath);
   const params = {
-    Bucket: process.env.AWS_BUCKET_NAME,
+    Bucket: process.env.CUSTOM_AWS_BUCKET_NAME,
     Key: `${uuid()}-${file.originalFilename}`,
     Body: fileStream,
   };
@@ -36,15 +36,15 @@ const s3Upload = async (file: any) => {
 
 const s3MetadataUpload = async (file: any) => {
   const s3 = new S3Client({
-    region: process.env.AWS_REGION,
+    region: process.env.CUSTOM_AWS_REGION,
     credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      accessKeyId: process.env.CUSTOM_AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.CUSTOM_AWS_SECRET_ACCESS_KEY,
     },
   });
 
   const params = {
-    Bucket: process.env.AWS_BUCKET_NAME,
+    Bucket: process.env.CUSTOM_AWS_BUCKET_NAME,
     Key: `${uuid()}.json`,
     Body: file,
     ContentEncoding: "base64",
