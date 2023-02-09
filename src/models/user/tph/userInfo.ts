@@ -29,6 +29,10 @@ const UserInfoSchema = new Schema(
       type: Array,
       default: [],
     },
+    profilePicture: {
+      type: String,
+      default: false,
+    },
   },
   {
     timestamps: true,

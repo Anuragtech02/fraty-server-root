@@ -30,6 +30,7 @@ import {
   isUserPresent,
   UserRSVPRemoveHandlerController,
   UpdateRSVPStatusHandler,
+  FratyProfileImage,
 } from "../../../controllers/users/fratty.controller";
 import { validateData } from "../../../utils/validateData";
 import { parseForm } from "../../../middleware/formdiable";
@@ -188,5 +189,6 @@ router.post(
 router.get("/myevents/:wallet", [param("wallet").notEmpty()], GetMyEvents);
 
 router.post("/imagetourl", parseForm, isFratty, ImagetoUrl);
+router.post("/profile-picture", parseForm, isFratty, FratyProfileImage);
 
 export default router;

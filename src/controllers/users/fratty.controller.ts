@@ -27,6 +27,7 @@ import {
   FrattyFindUser,
   UserRSVPRemoveHandler,
   updateRSVPStatus,
+  UpdateProfileImage,
 } from "../../services/users/fratty.service";
 import FrattyUser from "../../models/user/tph/frattyUser";
 import { UserInfo } from "../../models/user";
@@ -583,6 +584,20 @@ const ImagetoUrl = async (req: Request | any, res: Response) => {
   }
 };
 
+const FratyProfileImage = async (req: Request | any, res: Response) => {
+  try {
+    if (!req.files.image) {
+      return res.status(400).json({ error: "Image is required!" });
+    }
+    const saveImage = await UpdateProfileImage(
+      req.body.wallet,
+      req.files.image
+    );
+  } catch (error) {
+    return res.status(400).json({ error: error });
+  }
+};
+
 export {
   loginUser,
   UserRSVPHandlerController,
@@ -610,4 +625,5 @@ export {
   isUserPresent,
   UserRSVPRemoveHandlerController,
   UpdateRSVPStatusHandler,
+  FratyProfileImage,
 };

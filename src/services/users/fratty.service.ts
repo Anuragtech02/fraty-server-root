@@ -5,6 +5,7 @@ import { WEB3 } from "../../../config/web3";
 
 import { POAP_ABI } from "../../data/poap";
 import { Types } from "mongoose";
+import { s3Upload } from "../../utils/s3Service";
 
 const ObjectId = Types.ObjectId;
 
@@ -574,6 +575,30 @@ const LetIn = async (event: string, wallet: string) => {
   return { status: true, member: member };
 };
 
+const UpdateProfileImage = async (wallet: string, image: any) => {
+  try {
+    if (image) {
+      console.log("IMAGEEEEEEEE", image);
+      const cid: any = await s3Upload(image);
+      const imageUrl = cid?.Location;
+      const data: any = await UserInfo.findOneAndUpdate(
+        { wallet },
+        {
+          profilePicture: imageUrl,
+        },
+        {
+          new: true,
+        }
+      );
+      return data;
+    }
+    return { error: "No Image Found" };
+  } catch (error) {
+    console.log(error);
+    return { error };
+  }
+};
+
 export {
   FrattyLoginUser,
   UserRSVPHandler,
@@ -599,4 +624,5 @@ export {
   FrattyFindUser,
   UserRSVPRemoveHandler,
   updateRSVPStatus,
+  UpdateProfileImage,
 };
