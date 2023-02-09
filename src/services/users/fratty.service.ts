@@ -581,6 +581,7 @@ const UpdateProfileImage = async (wallet: string, image: any) => {
       console.log("IMAGEEEEEEEE", image);
       const cid: any = await s3Upload(image);
       const imageUrl = cid?.Location;
+      console.log("IMAGE URL", imageUrl);
       const data: any = await UserInfo.findOneAndUpdate(
         { wallet },
         {

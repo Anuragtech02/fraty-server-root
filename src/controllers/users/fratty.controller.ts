@@ -189,6 +189,7 @@ const FrattyUserImageController = async (req: Request | any, res: Response) => {
     const image = req.files.image;
     if (!image) return res.status(400).json({ error: "Image Not Found" });
     const cid: any = await s3Upload(image);
+    console.log("CIDDDD", cid);
     if (!cid?.Location)
       return res.status(400).json({ error: "Image Upload Failed" });
     const user = await FrattyUserImage(wallet, event, cid?.Location);
@@ -213,6 +214,7 @@ const FrattyUserChirpsController = async (
     let cid: any = null;
     if (image) {
       cid = await s3Upload(image);
+      console.log("CIDDDD", cid);
       req.body.image = cid?.Location;
     }
     const user = await FrattyUserChirps(
@@ -227,7 +229,7 @@ const FrattyUserChirpsController = async (
       message: user,
     });
   } catch (error) {
-    console.log(error);
+    console.log("CHIRP ERROR OCCURRED", error);
     return res.status(400).json({ error: error });
   }
 };
