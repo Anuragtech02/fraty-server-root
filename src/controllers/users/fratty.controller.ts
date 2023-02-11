@@ -114,9 +114,7 @@ const loginUser = async (req: Request, res: Response) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: req.headers.origin,
-      // expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
-      maxAge: 1000 * 60 * 60 * 24 * 7,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
     });
 
     return res.status(200).json({
