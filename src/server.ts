@@ -15,8 +15,12 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
+      "http://fraty.in",
       "https://fraty.in",
       "https://fraty.vercel.app",
+      "http://fraty.vercel.app",
+      "https://www.fraty.in",
+      "http://www.fraty.in",
     ],
     credentials: true,
   })
