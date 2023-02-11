@@ -109,6 +109,7 @@ const loginUser = async (req: Request, res: Response) => {
       name: name,
     });
     res.cookie(FRATY_AUTH_TOKEN, token, {
+      path: "/",
       httpOnly: true,
       secure: true,
       sameSite: "none",
