@@ -1,0 +1,1 @@
+export const FRATY_AUTH_TOKEN = "FRATY_AUTH_TOKEN";

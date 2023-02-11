@@ -32,6 +32,7 @@ import {
 import FrattyUser from "../../models/user/tph/frattyUser";
 import { UserInfo } from "../../models/user";
 import FrattyEvent from "../../models/admin/fraty/events";
+import { FRATY_AUTH_TOKEN } from "../../utils/constants";
 
 /* checks if user has rsvped and if not rsvp`s the event*/
 const UserRSVPHandlerController = async (req: Request, res: Response) => {
@@ -107,7 +108,7 @@ const loginUser = async (req: Request, res: Response) => {
       phoneNumber: wallet,
       name: name,
     });
-    res.cookie("FRATY_AUTH_TOKEN", token, {
+    res.cookie(FRATY_AUTH_TOKEN, token, {
       httpOnly: true,
       secure: true,
       sameSite: "none",
@@ -125,6 +126,20 @@ const loginUser = async (req: Request, res: Response) => {
     return res.status(400).json({ error: error });
   }
 };
+
+const logoutUser = async (req: Request, res: Response) => {
+  try {
+    res.clearCookie(FRATY_AUTH_TOKEN);
+    return res.status(200).json({
+      status: 200,
+      message: "logged out",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ error: error });
+  }
+};
+
 const isUserPresent = async (req: Request, res: Response) => {
   const { wallet } = req?.query;
   const data = await FrattyFindUser(String(wallet));
