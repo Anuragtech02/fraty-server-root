@@ -113,6 +113,10 @@ const loginUser = async (req: Request, res: Response) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
+      domain:
+        req.headers.host === "localhost:3000"
+          ? "localhost"
+          : "https://www.fratty.in",
       // expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
@@ -129,6 +133,7 @@ const loginUser = async (req: Request, res: Response) => {
 };
 
 const logoutUser = async (req: Request, res: Response) => {
+  console.log("Logging out");
   try {
     res.clearCookie(FRATY_AUTH_TOKEN);
     return res.status(200).json({
@@ -624,6 +629,7 @@ const FratyProfileImage = async (req: Request | any, res: Response) => {
 
 export {
   loginUser,
+  logoutUser,
   UserRSVPHandlerController,
   FrattyUserPollController,
   FrattyUserStatusController,

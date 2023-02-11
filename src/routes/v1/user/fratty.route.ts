@@ -31,6 +31,7 @@ import {
   UserRSVPRemoveHandlerController,
   UpdateRSVPStatusHandler,
   FratyProfileImage,
+  logoutUser,
 } from "../../../controllers/users/fratty.controller";
 import { validateData } from "../../../utils/validateData";
 import { parseForm } from "../../../middleware/formdiable";
@@ -113,6 +114,7 @@ router.post(
   validateData,
   loginUser
 );
+router.post("/userlogout", isFratty, logoutUser);
 router.get("/", isFratty, FrattyUserGetController);
 router.post("/images", isFratty, AllImagesController);
 router.post("/chirps", isFratty, AllChirpsController);
