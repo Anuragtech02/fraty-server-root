@@ -19,7 +19,6 @@ app.use(
       "https://fraty.vercel.app",
     ],
     credentials: true,
-    preflightContinue: true,
   })
 );
 app.use(express.json());

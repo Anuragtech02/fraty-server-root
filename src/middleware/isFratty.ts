@@ -3,7 +3,6 @@ import { FrattyUser, UserInfo } from "../models/user";
 
 export const isFratty = async (req: any, res: any, next: any) => {
   const token = req.cookies.FRATY_AUTH_TOKEN;
-  console.log("COOOKIESSS", req.cookies);
   if (!token) {
     return res.status(401).json({
       status: "error",
