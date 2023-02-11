@@ -24,6 +24,7 @@ app.use(
       "http://www.fraty.in",
     ],
     credentials: true,
+    preflightContinue: true,
   })
 );
 app.use(express.json());
