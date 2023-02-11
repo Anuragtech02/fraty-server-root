@@ -11,6 +11,7 @@ const port = process.env.PORT || 5000;
 
 dotenv.config();
 
+app.set("trust proxy", 1);
 app.use(
   cors({
     origin: [
@@ -28,7 +29,6 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.set("trust proxy", 1);
 app.use(cookieParser());
 app.use(compression());
 
