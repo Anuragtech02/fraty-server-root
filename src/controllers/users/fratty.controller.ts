@@ -100,7 +100,6 @@ const UserRSVPRemoveHandlerController = async (req: Request, res: Response) => {
 const loginUser = async (req: Request, res: Response) => {
   try {
     const { wallet, name } = req.body;
-    console.log(req.body);
     const user = await FrattyLoginUser(wallet, name);
     if (user?.error) return res.status(400).json({ error: user?.error });
     const token = generateToken({
@@ -108,7 +107,13 @@ const loginUser = async (req: Request, res: Response) => {
       phoneNumber: wallet,
       name: name,
     });
-    console.log(token);
+    res.cookie("FRATY_AUTH_TOKEN", token, {
+      path: "/",
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+    });
     return res.status(200).json({
       status: 200,
       message: user,

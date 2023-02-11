@@ -2,8 +2,8 @@ import { verifyToken } from "../utils/tokenGenerator";
 import { FrattyUser, UserInfo } from "../models/user";
 
 export const isFratty = async (req: any, res: any, next: any) => {
-  const token = req.headers.authorization;
-  console.log(token);
+  const token = req.cookies.token;
+  console.log("COOOKIESSS", req.cookies);
   if (!token) {
     return res.status(401).json({
       status: "error",
