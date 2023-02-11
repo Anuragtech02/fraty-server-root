@@ -100,7 +100,7 @@ const UserRSVPRemoveHandlerController = async (req: Request, res: Response) => {
 // }
 const loginUser = async (req: Request, res: Response) => {
   try {
-    console.log("HOST", req.headers.host);
+    console.log("HOST", req.headers.host, "Origin", req.headers.origin);
     const { wallet, name } = req.body;
     const user = await FrattyLoginUser(wallet, name);
     if (user?.error) return res.status(400).json({ error: user?.error });
@@ -111,14 +111,9 @@ const loginUser = async (req: Request, res: Response) => {
     });
 
     res.cookie(FRATY_AUTH_TOKEN, token, {
-      path: "/",
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain:
-        req.headers.origin === "http://localhost:3000"
-          ? "localhost"
-          : "www.fraty.in",
       // expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
