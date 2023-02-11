@@ -118,7 +118,7 @@ const loginUser = async (req: Request, res: Response) => {
       domain:
         req.headers.origin === "http://localhost:3000"
           ? "localhost"
-          : "https://www.fraty.in",
+          : "www.fraty.in",
       // expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
