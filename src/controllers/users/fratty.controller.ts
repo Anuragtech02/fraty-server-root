@@ -112,8 +112,10 @@ const loginUser = async (req: Request, res: Response) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+      // expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+      maxAge: 1000 * 60 * 60 * 24 * 7,
     });
+
     return res.status(200).json({
       status: 200,
       message: user,
