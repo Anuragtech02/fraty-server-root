@@ -14,7 +14,15 @@ dotenv.config();
 app.set("trust proxy", 1);
 app.use(
   cors({
-    origin: "*",
+    origin: [
+      "http://localhost:3000",
+      "http://fraty.in",
+      "https://fraty.in",
+      "https://fraty.vercel.app",
+      "http://fraty.vercel.app",
+      "https://www.fraty.in",
+      "http://www.fraty.in",
+    ],
     credentials: true,
     preflightContinue: true,
   })
