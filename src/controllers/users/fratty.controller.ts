@@ -114,6 +114,7 @@ const loginUser = async (req: Request, res: Response) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
+      domain: "https://fraty.vercel.app",
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
     });
     res.header("Access-Control-Allow-Credentials", "true");
