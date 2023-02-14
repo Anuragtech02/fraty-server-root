@@ -6,6 +6,7 @@
     "start": "node ./src/server.js",
     "tsc": "tsc",
     "watch-tsc": "tsc -w",
+    "custom-build": "tsc",
     "deploy": "node dist/src/server.js",
     "watch-deploy": "nodemon dist/src/server.js",
     "build": "tsc",
