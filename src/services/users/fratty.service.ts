@@ -382,7 +382,8 @@ const updateRSVPStatus = async (
 ) => {
   const updatedUser = await FrattyUser.findOneAndUpdate(
     { wallet, event },
-    { Status: status }
+    { Status: status },
+    { new: true, upsert: true }
   );
   return { message: "RSVP Updated", user: updatedUser };
 };
