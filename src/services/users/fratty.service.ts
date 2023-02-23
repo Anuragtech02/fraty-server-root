@@ -28,7 +28,8 @@ const UserRSVPHandler = async (
   wallet: string,
   name: string,
   event: string,
-  referral: string
+  referral: string,
+  status?: string
 ) => {
   console.log("there", wallet, name, event, referral);
   const findEvent = await FrattyAdmin.findOne({ _id: event });
@@ -53,7 +54,7 @@ const UserRSVPHandler = async (
     wallet: wallet,
     name: name,
     event: event,
-    Status: "going",
+    Status: status || "going",
     referralCode: referral,
   });
   console.log({ create });

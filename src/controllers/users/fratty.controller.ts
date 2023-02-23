@@ -37,13 +37,14 @@ import { FRATY_AUTH_TOKEN } from "../../utils/constants";
 /* checks if user has rsvped and if not rsvp`s the event*/
 const UserRSVPHandlerController = async (req: Request, res: Response) => {
   try {
-    const { phoneNumber, name, event, referral } = req.body;
+    const { phoneNumber, name, event, referral, status } = req.body;
     console.log("here", phoneNumber, event, referral);
     const user = await UserRSVPHandler(
       String(phoneNumber),
       String(name),
       String(event),
-      referral ? referral : "false"
+      referral ? referral : "false",
+      status
     );
     console.log(user);
     if (user?.error) return res.status(400).json({ error: user?.error });
