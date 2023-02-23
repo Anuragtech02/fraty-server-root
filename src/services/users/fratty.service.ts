@@ -57,7 +57,13 @@ const UserRSVPHandler = async (
     Status: status || "going",
     referralCode: referral,
   });
-  console.log({ create });
+  const createChirp = await TphChirps.create({
+    wallet: wallet,
+    text: `${findUserInfo?.name} is coming to the party! 💃.`,
+    image: null,
+    event: event,
+    profilePicture: findUserInfo?.profilePicture,
+  });
   if (!create) return { error: "User Not Created" };
   return {
     message: "User Created",
