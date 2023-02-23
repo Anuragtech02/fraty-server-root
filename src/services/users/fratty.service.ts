@@ -202,12 +202,14 @@ const FrattyUserChirps = async (
     wallet: wallet,
     event: event,
   });
+  const userInfo = await UserInfo.findOne({ wallet: wallet });
   if (!findUser) return { error: "User Not Found" };
   const create = await TphChirps.create({
     wallet: wallet,
     text: text,
     image: image,
     event: event,
+    profilePicture: userInfo?.profilePicture,
   });
   if (!create) return { error: "Chirp Not Created" };
   return { message: "Chirp Created" };
