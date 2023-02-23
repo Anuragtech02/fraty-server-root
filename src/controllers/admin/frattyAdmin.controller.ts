@@ -105,6 +105,8 @@ const CreateNewEvent = async (req: Request | any, res: Response) => {
       payload["locationURL"] = locationURL;
     }
 
+    console.log("YEHI TO LOG KARWANA HAI", { payload });
+
     const data: any = await AddNewEvent(payload);
 
     if (data?.error)

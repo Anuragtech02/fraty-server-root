@@ -382,8 +382,19 @@ const updateRSVPStatus = async (
 ) => {
   const updatedUser = await FrattyUser.findOneAndUpdate(
     { wallet, event },
-    { Status: status }
+    { Status: status },
+    { new: true, upsert: true }
   );
+  console.log({ event });
+  // if (status === "going") {
+  //   const res = await FrattyUserChirps(
+  //     wallet,
+  //     event,
+  //     `${updatedUser?.name} is coming to the party! 💃.`,
+  //     null
+  //   );
+  //   console.log(res, "ye he to hai jo hai");
+  // }
   return { message: "RSVP Updated", user: updatedUser };
 };
 const EventData = async (event: string, wallet: string) => {

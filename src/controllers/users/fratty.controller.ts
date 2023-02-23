@@ -239,6 +239,7 @@ const FrattyUserChirpsController = async (
       console.log("CIDDDD", cid);
       req.body.image = cid?.Location;
     }
+    console.log({ event });
     const user = await FrattyUserChirps(
       wallet,
       event,
