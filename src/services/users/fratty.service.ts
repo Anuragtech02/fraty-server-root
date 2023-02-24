@@ -31,14 +31,12 @@ const UserRSVPHandler = async (
   referral: string,
   status?: string
 ) => {
-  console.log("there", wallet, name, event, referral);
   const findEvent = await FrattyAdmin.findOne({ _id: event });
   if (!findEvent) return { error: "Event Not Found" };
   const findUser = await FrattyUser.findOne({
     wallet: wallet,
     event: event,
   })?.lean();
-  console.log(findUser);
   const findUserInfo = await UserInfo.findOne({ wallet: wallet })?.lean();
   if (findUser) {
     if (findUser?.Status !== status) {
@@ -57,14 +55,16 @@ const UserRSVPHandler = async (
     Status: status || "going",
     referralCode: referral,
   });
-  const createChirp = await TphChirps.create({
-    wallet: wallet,
-    text: `${findUserInfo?.name} is coming to the party! 💃.`,
-    image: "false",
-    event: event,
-    profilePicture: findUserInfo?.profilePicture,
-  });
   if (!create) return { error: "User Not Created" };
+  if (status === "going") {
+    const createChirp = await TphChirps.create({
+      wallet: wallet,
+      text: `${findUserInfo?.name} is coming to the party! 💃.`,
+      image: "false",
+      event: event,
+      profilePicture: findUserInfo?.profilePicture,
+    });
+  }
   return {
     message: "User Created",
     user: create,
