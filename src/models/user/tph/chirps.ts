@@ -24,7 +24,7 @@ const TphChirpsSchema = new Schema(
     },
     profilePicture: {
       type: String,
-      default: "",
+      default: "false",
     },
   },
   {

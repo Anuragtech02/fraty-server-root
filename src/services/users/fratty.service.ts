@@ -41,10 +41,10 @@ const UserRSVPHandler = async (
   console.log(findUser);
   const findUserInfo = await UserInfo.findOne({ wallet: wallet })?.lean();
   if (findUser) {
-    if (findUser?.Status !== "going") {
+    if (findUser?.Status !== status) {
       const update = await FrattyUser.findOneAndUpdate(
         { wallet: wallet, event: event },
-        { Status: "going" }
+        { Status: status || "going" }
       );
       return { user: update, isFirstTime: findUserInfo ? false : true };
     }
@@ -60,7 +60,7 @@ const UserRSVPHandler = async (
   const createChirp = await TphChirps.create({
     wallet: wallet,
     text: `${findUserInfo?.name} is coming to the party! 💃.`,
-    image: null,
+    image: "false",
     event: event,
     profilePicture: findUserInfo?.profilePicture,
   });
